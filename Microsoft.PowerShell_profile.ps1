@@ -1,18 +1,3 @@
-# Autocompletion #######################################################################################################
-
-Set-PSReadLineOption -PredictionSource HistoryAndPlugin
-Set-PSReadLineOption -PredictionViewStyle ListView
-Set-PSReadLineOption -HistoryNoDuplicates 
-Set-PSReadLineOption -BellStyle None
-
-# Plugins
-Import-Module CompletionPredictor
-
-# Carapace Completions
-Set-PSReadLineOption -Colors @{ "Selection" = "`e[7m" }
-Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
-carapace _carapace | Out-String | Invoke-Expression
-
 # VIM Mode #############################################################################################################
 
 $env:EDITOR = $env:VISUAL = 'nvim'
@@ -30,6 +15,21 @@ $OnViModeChange = [scriptblock]{
 }
 Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $OnViModeChange
 
+# Autocompletion #######################################################################################################
+
+Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadLineOption -HistoryNoDuplicates 
+Set-PSReadLineOption -BellStyle None
+
+# Plugins
+Import-Module CompletionPredictor
+
+Set-PSReadLineOption -Colors @{ "Selection" = "`e[7m" }
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+carapace _carapace | Out-String | Invoke-Expression
+
+
 # Prompt ###############################################################################################################
 # Add new line
-# $GitPromptSettings.DefaultPromptBeforeSuffix.Text = '`n'
+# TODO
