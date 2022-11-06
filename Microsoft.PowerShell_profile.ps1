@@ -24,4 +24,5 @@ Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $OnViModeChang
 
 Import-Module posh-git
 
-########################################################################################################################
+# Add new line to prompt
+$GitPromptSettings.DefaultPromptBeforeSuffix.Text = '`n'
