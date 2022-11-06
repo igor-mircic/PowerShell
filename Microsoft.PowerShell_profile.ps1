@@ -20,4 +20,8 @@ $OnViModeChange = [scriptblock]{
 }
 Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $OnViModeChange
 
+# Git ##################################################################################################################
+
+Import-Module posh-git
+
 ########################################################################################################################
