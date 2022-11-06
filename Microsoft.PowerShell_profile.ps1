@@ -15,6 +15,9 @@ $OnViModeChange = [scriptblock]{
 }
 Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $OnViModeChange
 
+# Prompt ###############################################################################################################
+function prompt {"$pwd `n" + "> "}
+
 # Autocompletion #######################################################################################################
 
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
@@ -28,8 +31,3 @@ Import-Module CompletionPredictor
 Set-PSReadLineOption -Colors @{ "Selection" = "`e[7m" }
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 carapace _carapace | Out-String | Invoke-Expression
-
-
-# Prompt ###############################################################################################################
-# Add new line
-# TODO
