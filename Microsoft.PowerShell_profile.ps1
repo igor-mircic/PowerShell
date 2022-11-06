@@ -2,11 +2,20 @@
 
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
 Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadLineOption -HistoryNoDuplicates 
+Set-PSReadLineOption -BellStyle None
 
-# Editor ###############################################################################################################
+# Plugins
+Import-Module CompletionPredictor
+Import-Module DockerCompletion
+Import-Module posh-git
+
+# VIM Mode #############################################################################################################
 
 $env:EDITOR = $env:VISUAL = 'nvim'
 Set-PsReadLineOption -EditMode Vi
+
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 
 $OnViModeChange = [scriptblock]{
     if ($args[0] -eq 'Command') {
@@ -20,9 +29,6 @@ $OnViModeChange = [scriptblock]{
 }
 Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $OnViModeChange
 
-# Git ##################################################################################################################
-
-Import-Module posh-git
-
-# Add new line to prompt
+# Prompt ###############################################################################################################
+# Add new line
 $GitPromptSettings.DefaultPromptBeforeSuffix.Text = '`n'
