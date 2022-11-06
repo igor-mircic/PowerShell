@@ -7,15 +7,16 @@ Set-PSReadLineOption -BellStyle None
 
 # Plugins
 Import-Module CompletionPredictor
-Import-Module DockerCompletion
-Import-Module posh-git
+
+# Carapace Completions
+Set-PSReadLineOption -Colors @{ "Selection" = "`e[7m" }
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+carapace _carapace | Out-String | Invoke-Expression
 
 # VIM Mode #############################################################################################################
 
 $env:EDITOR = $env:VISUAL = 'nvim'
 Set-PsReadLineOption -EditMode Vi
-
-Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 
 $OnViModeChange = [scriptblock]{
     if ($args[0] -eq 'Command') {
@@ -31,4 +32,4 @@ Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $OnViModeChang
 
 # Prompt ###############################################################################################################
 # Add new line
-$GitPromptSettings.DefaultPromptBeforeSuffix.Text = '`n'
+# $GitPromptSettings.DefaultPromptBeforeSuffix.Text = '`n'
