@@ -3,7 +3,7 @@
 $env:EDITOR = $env:VISUAL = 'nvim'
 Set-PsReadLineOption -EditMode Vi
 
-$OnViModeChange = [scriptblock]{
+$OnViModeChange = [scriptblock] {
     if ($args[0] -eq 'Command') {
         # Set the cursor to a blinking block.
         Write-Host -NoNewLine "`e[1 q"
@@ -16,7 +16,7 @@ $OnViModeChange = [scriptblock]{
 Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $OnViModeChange
 
 # Prompt ###############################################################################################################
-function prompt {"$pwd `n" + "> "}
+Invoke-Expression (&starship init powershell)
 
 # Autocompletion #######################################################################################################
 
